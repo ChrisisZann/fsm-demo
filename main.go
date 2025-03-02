@@ -21,8 +21,9 @@ const (
 )
 
 func (f *fsm) StartFSM() {
-	for {
+	fmt.Print("type yes to move to next state:")
 
+	for {
 		select {
 		case v := <-f.v1:
 
@@ -51,7 +52,6 @@ func (f *fsm) StartFSM() {
 					f.nxtState = s2
 				}
 			}
-
 		}
 		f.curState = f.nxtState
 		fmt.Println("New state", f.curState)
@@ -76,7 +76,6 @@ func main() {
 
 	var user string
 	for {
-		fmt.Print("Enter message:")
 		fmt.Scan(&user)
 		if strings.Compare(user, "yes") == 0 {
 			f.v1 <- success
